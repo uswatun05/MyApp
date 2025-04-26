@@ -1,0 +1,73 @@
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+
+const HomeScreen = () => {
+  const [DataTrend, setDataTrend] = useState([]);
+  const [kategoriSeleksi, setKategoriSeleksi] = useState('Chicken');
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchDataTrend = async () => {
+      try {
+        const response = await axios.get(
+          `https://www.themealdb.com/api/json/v1/1/filter.php?c=${kategoriSeleksi}`
+        );
+        setDataTrend(response.data.meals);
+      } catch (error) {
+        console.error('Gagal ambil data:', error);
+      }
+    };
+    fetchDataTrend();
+  }, [kategoriSeleksi]);
+
+  return (
+    <View style={styles.container}>
+      <StatusBar backgroundColor='#fff' barStyle='dark-content' />
+
+      <FlatList
+        data={DataTrend}
+        horizontal
+        keyExtractor={(item) => item.idMeal}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.recipeCard}
+            onPress={() => navigation.navigate('RecipeDetail', { recipeId: item.idMeal })} // ← ini yang dibenerin
+          >
+            <Image
+              source={{ uri: item.strMealThumb }}
+              style={styles.recipeImage}
+              resizeMode="cover"
+            />
+            <Text style={styles.recipeName}>{item.strMeal}</Text>
+          </TouchableOpacity>
+        )}
+        contentContainerStyle={{ paddingHorizontal: 16 }} // tambahan biar nggak error di FlatList
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  recipeCard: {
+    width: 150,
+    marginRight: 15,
+    alignItems: 'center',
+  },
+  recipeImage: {
+    width: '100%',
+    height: 100,
+    borderRadius: 8,
+  },
+  recipeName: {
+    marginTop: 5,
+    fontWeight: 'bold',
+  },
+});
+
+export default HomeScreen;
