@@ -3,8 +3,10 @@ import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
 
 export default function RecipeDetail({ route }) {
-  const { recipeId } = route.params; // AMBIL dari route.params
+  const { recipeId } = route.params;
   const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchDetail = async () => {
@@ -13,8 +15,11 @@ export default function RecipeDetail({ route }) {
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`
         );
         setDetail(res.data.meals[0]);
+        setLoading(false);
       } catch (error) {
         console.error('Gagal ambil detail:', error);
+        setError(true);
+        setLoading(false);
       }
     };
 

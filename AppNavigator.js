@@ -1,8 +1,8 @@
-// In App.js or your navigation file
+
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeScreen from './HomeScreen';
-import RecipeDetail from './RecipeDetail'; // Pastikan ini sesuai dengan nama file
+import RecipeDetail from './RecipeDetail'; 
 
 const Stack = createStackNavigator();
 

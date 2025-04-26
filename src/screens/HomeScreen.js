@@ -6,6 +6,7 @@ import axios from 'axios';
 const HomeScreen = () => {
   const [DataTrend, setDataTrend] = useState([]);
   const [kategoriSeleksi, setKategoriSeleksi] = useState('Chicken');
+  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -17,6 +18,8 @@ const HomeScreen = () => {
         setDataTrend(response.data.meals);
       } catch (error) {
         console.error('Gagal ambil data:', error);
+      } finally {
+        setLoading(false);
       }
     };
     fetchDataTrend();
@@ -33,7 +36,7 @@ const HomeScreen = () => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.recipeCard}
-            onPress={() => navigation.navigate('RecipeDetail', { recipeId: item.idMeal })} // ← ini yang dibenerin
+            onPress={() => navigation.navigate('RecipeDetail', { recipeId: item.idMeal })} 
           >
             <Image
               source={{ uri: item.strMealThumb }}
@@ -43,7 +46,7 @@ const HomeScreen = () => {
             <Text style={styles.recipeName}>{item.strMeal}</Text>
           </TouchableOpacity>
         )}
-        contentContainerStyle={{ paddingHorizontal: 16 }} // tambahan biar nggak error di FlatList
+        contentContainerStyle={{ paddingHorizontal: 16 }} 
       />
     </View>
   );
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: 20,
   },
   recipeCard: {
     width: 150,
@@ -67,6 +71,7 @@ const styles = StyleSheet.create({
   recipeName: {
     marginTop: 5,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
