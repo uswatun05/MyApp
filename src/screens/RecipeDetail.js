@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
 import axios from 'axios';
+import { useSearchParams } from 'expo-router';
 
-export default function RecipeDetail({ route }) {
-  const { recipeId } = route.params;
+export default function RecipeDetail() {
+  const { idMeal } = useSearchParams();
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
