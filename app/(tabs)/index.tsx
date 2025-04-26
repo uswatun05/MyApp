@@ -36,7 +36,7 @@ const App = () => {
       <StatusBar backgroundColor='#5f5f55' barStyle='dark-content' />
       <View style={{ alignItems: 'center', marginBottom: 20, marginTop: 20 }}>
         <Text style={{ fontSize: 28, fontWeight: 'bold', color: '#212121' }}>
-          Resep<Text style={{ color: '#ff7f00' }}>Food🍝</Text>
+          Recipe<Text style={{ color: '#ff7f00' }}>Food🍝</Text>
         </Text>
       </View>
 
