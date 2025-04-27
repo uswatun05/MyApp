@@ -143,8 +143,7 @@ const HomeScreen = () => {
               style={styles.recipeCard}
               onPress={() => {
                 setSelectedResep(item);
-                router.push({ pathname: '/RecipeDetail', params: { idMeal: '52772' } })
-
+                router.push(`/detail/${item.id}`);
               }}
               
             >
