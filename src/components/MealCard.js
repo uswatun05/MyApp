@@ -11,7 +11,7 @@ const MealCard = ({ meal }) => {
       onPress={() => router.push(`/detail/${meal.id}`)}
     >
       <Image
-        source={{ uri: meal.Image.uri }}
+        source={{  uri: meal.strMealThumb }}
         style={styles.image}
         resizeMode="cover"
       />

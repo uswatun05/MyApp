@@ -4,9 +4,10 @@ import {
   StyleSheet, ScrollView, StatusBar
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import {axios} from 'axios';
+import axios from 'axios';
 import { useRouter } from 'expo-router';
 import {MealCard} from '../../components/MealCard';
+import { getMealsByCategory, getMealDetailById } from '../../src/api/mealApi';
 
 
 const router = useRouter(); 
@@ -62,10 +63,12 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar backgroundColor='#fff' barStyle='dark-content' />
-      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+  <StatusBar backgroundColor='#fff' barStyle='dark-content' />
 
-        {/* Title */}
+  {/* Judul, kategori, search bar, deskripsi */}
+  <FlatList
+    ListHeaderComponent={
+      <>
         <View style={styles.titleContainer}>
           <Text style={styles.mainTitle}>
             Food<Text style={styles.highlightTitle}>Recipe🍝</Text>
@@ -111,11 +114,6 @@ const HomeScreen = () => {
           />
         </View>
 
-        {/* Section Header */}
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Trending</Text>
-        </View>
-
         {/* Deskripsi Resep */}
         {(filteredData.length > 0 || selectedResep) && (
           <View style={styles.deskripsiBox}>
@@ -132,20 +130,24 @@ const HomeScreen = () => {
           </View>
         )}
 
-        {/* List Resep */}
-        <FlatList
-          data={filteredData}
-          numColumns={2}
-          keyExtractor={(item) => item.id.toString()}
-          showsVerticalScrollIndicator={false}
-          style={styles.recipeList}
-          contentContainerStyle={{ paddingHorizontal: 10 }}
-          renderItem={({ item }) => <MealCard meal={item} />}/>
-      </ScrollView>
+        {/* Section Header */}
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Trending</Text>
+        </View>
+      </>
+    }
+    data={filteredData}
+    numColumns={2}
+    keyExtractor={(item) => item.id.toString()}
+    showsVerticalScrollIndicator={false}
+    contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 100 }}
+    renderItem={({ item }) => <MealCard meal={item} />}
+  />
 
-      {/* Bottom Menu */}
-      <View style={styles.bottomNav}></View>
-    </View>
+  {/* Bottom Menu */}
+  <View style={styles.bottomNav}></View>
+</View>
+
   );
 };
 

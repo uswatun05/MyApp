@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { useLocalSearchParams } from 'expo-router';
-import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { getMealDetailById } from '../../src/api/mealApi';
 
 export default function Detail() {
-  const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams(); 
   const router = useRouter();
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const { query } = useRouter();
 
-  const { idMeal } = query;
   useEffect(() => {
-    if (!idMeal) return;              
+    if (!id) return;
     const fetchMeal = async () => {
       try {
-        const res = await fetch(
-          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
-        );
-        const json = await res.json();
-        if (json.meals?.length) {
-          setMeal(json.meals[0]);
+        const mealDetail = await getMealDetailById(id); 
+        
+        if (mealDetail) {
+          setMeal(mealDetail);
         } else {
           setError(true);
         }
@@ -34,7 +30,7 @@ export default function Detail() {
       }
     };
     fetchMeal();
-  }, [idMeal]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -55,7 +51,6 @@ export default function Detail() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {}
       <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
         <Ionicons name="arrow-back" size={24} color="#333" />
         <Text style={styles.backText}>Kembali</Text>
