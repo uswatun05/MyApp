@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import axios from 'axios';
 
 const HomeScreen = () => {
   const [DataTrend, setDataTrend] = useState([]);
   const [kategoriSeleksi, setKategoriSeleksi] = useState('Chicken');
   const [loading, setLoading] = useState(true);
-  const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchDataTrend = async () => {
@@ -25,6 +25,9 @@ const HomeScreen = () => {
     fetchDataTrend();
   }, [kategoriSeleksi]);
 
+  const handleNavigate = (idMeal) => {
+    router.push(`/detail/${idMeal}`);};
+
   return (
     <View style={styles.container}>
       <StatusBar backgroundColor='#fff' barStyle='dark-content' />
@@ -36,7 +39,7 @@ const HomeScreen = () => {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.recipeCard}
-            onPress={() => navigation.navigate('RecipeDetail', { recipeId: item.idMeal })} 
+            onPress={() => handleNavigate(item.idMeal)}
           >
             <Image
               source={{ uri: item.strMealThumb }}

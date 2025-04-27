@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function Detail() {
   const { id } = useLocalSearchParams();
@@ -9,7 +10,9 @@ export default function Detail() {
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { query } = useRouter();
 
+  const { idMeal } = query;
   useEffect(() => {
     const fetchMeal = async () => {
       try {

@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useRouter } from 'expo-router';
 import MealCard from '../../components/MealCard';
 
+
 const router = useRouter(); 
 
 const HomeScreen = () => {
@@ -139,10 +140,7 @@ const HomeScreen = () => {
           showsVerticalScrollIndicator={false}
           style={styles.recipeList}
           contentContainerStyle={{ paddingHorizontal: 10 }}
-          renderItem={({ item }) => (
-            <MealCard meal={item} />
-          )}
-        />
+          renderItem={({ item }) => <MealCard meal={item} />}/>
       </ScrollView>
 
       {/* Bottom Menu */}
