@@ -1,4 +1,3 @@
-// components/MealCard.js
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useRouter } from 'expo-router';
@@ -6,25 +5,30 @@ import { useRouter } from 'expo-router';
 const MealCard = ({ meal }) => {
   const router = useRouter();
 
+  const handlePress = () => {
+    if (meal?.id) {
+      router.push(`/detail/${meal.id}`);
+    } else {
+      console.warn('ID meal tidak ditemukan');
+    }
+  };
+
   return (
-    <TouchableOpacity
-      style={styles.card}
-      onPress={() => router.push(`/detail/${meal.id}`)}
-    >
+    <TouchableOpacity style={styles.card} onPress={handlePress}>
       <Image
-        source={{ uri: meal.Image.uri }}
+        source={{ uri: meal?.Image?.uri || 'https://via.placeholder.com/150' }}
         style={styles.image}
         resizeMode="cover"
       />
       <View style={styles.textContainer}>
         <Text style={styles.title} numberOfLines={1}>
-          {meal.namaResep}
+          {meal?.namaResep || 'Nama Resep Tidak Ditemukan'}
         </Text>
         <Text style={styles.author} numberOfLines={1}>
-          {meal.author}
+          {meal?.author || 'Author Tidak Diketahui'}
         </Text>
         <Text style={styles.description} numberOfLines={2}>
-          {meal.description}
+          {meal?.description || 'Deskripsi tidak tersedia'}
         </Text>
       </View>
     </TouchableOpacity>
@@ -38,8 +42,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 12,
     overflow: 'hidden',
-    elevation: 3, 
-    shadowColor: '#000', 
+    elevation: 3,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
