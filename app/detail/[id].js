@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { View, Text, Image, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function Detail() {
   const { id } = useLocalSearchParams();
+  const router = useRouter();
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -48,6 +50,11 @@ export default function Detail() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      {}
+      <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+        <Ionicons name="arrow-back" size={24} color="#333" />
+        <Text style={styles.backText}>Kembali</Text>
+      </TouchableOpacity>
       <Image source={{ uri: meal.strMealThumb }} style={styles.image} />
       <Text style={styles.title}>{meal.strMeal}</Text>
       <Text style={styles.category}>Kategori: {meal.strCategory}</Text>
@@ -66,6 +73,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  backText: {
+    fontSize: 16,
+    marginLeft: 6,
+    color: '#333',
   },
   image: {
     width: '100%',

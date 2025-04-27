@@ -6,6 +6,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 import { useRouter } from 'expo-router';
+import MealCard from '../../components/MealCard';
 
 const router = useRouter(); 
 
@@ -139,25 +140,7 @@ const HomeScreen = () => {
           style={styles.recipeList}
           contentContainerStyle={{ paddingHorizontal: 10 }}
           renderItem={({ item }) => (
-            <TouchableOpacity
-              style={styles.recipeCard}
-              onPress={() => {
-                setSelectedResep(item);
-                router.push(`/detail/${item.id}`);
-              }}
-              
-            >
-              <Image
-                source={item.Image}
-                style={styles.recipeImage}
-                resizeMode="cover"
-              />
-              <Text style={styles.recipeName}>{item.namaResep}</Text>
-              <Text style={styles.recipeAuthor}>{item.author}</Text>
-              <Text style={styles.recipeDescription} numberOfLines={2}>
-                {item.description}
-              </Text>
-            </TouchableOpacity>
+            <MealCard meal={item} />
           )}
         />
       </ScrollView>
