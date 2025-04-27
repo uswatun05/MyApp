@@ -1,20 +1,17 @@
-
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import {HomeScreen} from './HomeScreen';
-
+import { useRouter } from 'expo-router'; 
+import React from 'react';
 
 const Stack = createStackNavigator();
 
-function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="RecipeDetail" component={RecipeDetail} /> {/* Ini yang harus sesuai */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+const AppNavigator = () => {
+  const router = useRouter(); 
 
-export default App;
+  return (
+    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Home" component={() => router.push('/')} /> {/* Menavigasi ke halaman utama */}
+    </Stack.Navigator>
+  );
+};
+
+export default AppNavigator;
