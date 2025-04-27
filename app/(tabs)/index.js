@@ -9,10 +9,8 @@ import { useRouter } from 'expo-router';
 import {MealCard} from '../../components/MealCard';
 import { getMealsByCategory, getMealDetailById } from '../../src/api/mealApi';
 
-
-const router = useRouter(); 
-
 const HomeScreen = () => {
+  const router = useRouter(); 
   const [kategori, setKategori] = useState([
     { nama: 'Chicken' }, { nama: 'Seafood' }, { nama: 'Beef' },
     { nama: 'Pasta' }, { nama: 'Dessert' }, { nama: 'Lamb' },
