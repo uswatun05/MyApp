@@ -1,6 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
-import RecipeDetail from '../screens/RecipeDetail'; // pastikan ini juga ada
+
 
 const Stack = createStackNavigator();
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
-import axios from 'axios';
+import {axios} from 'axios';
 
 const HomeScreen = () => {
   const [DataTrend, setDataTrend] = useState([]);

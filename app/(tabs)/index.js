@@ -4,9 +4,9 @@ import {
   StyleSheet, ScrollView, StatusBar
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import axios from 'axios';
+import {axios} from 'axios';
 import { useRouter } from 'expo-router';
-import MealCard from '../../components/MealCard';
+import {MealCard} from '../../components/MealCard';
 
 
 const router = useRouter(); 

@@ -14,12 +14,15 @@ export default function Detail() {
 
   const { idMeal } = query;
   useEffect(() => {
+    if (!idMeal) return;              
     const fetchMeal = async () => {
       try {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-        const data = await response.json();
-        if (data.meals && data.meals.length > 0) {
-          setMeal(data.meals[0]);
+        const res = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`
+        );
+        const json = await res.json();
+        if (json.meals?.length) {
+          setMeal(json.meals[0]);
         } else {
           setError(true);
         }
@@ -30,9 +33,8 @@ export default function Detail() {
         setLoading(false);
       }
     };
-
     fetchMeal();
-  }, [id]);
+  }, [idMeal]);
 
   if (loading) {
     return (

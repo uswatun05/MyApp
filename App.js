@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './src/screens/HomeScreen';  // Path ke file HomeScreen.js
-import RecipeDetail from './src/screens/RecipeDetail';  // Path ke file RecipeDetailScreen.js
+import {HomeScreen} from './src/screens/HomeScreen';  
+
 
 const Stack = createStackNavigator();
 
