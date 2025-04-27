@@ -1,7 +1,7 @@
 {
   "expo":{
     "splash":{
-      "image":"./assets/images/bibimbap.png",
+      "image":"./assets/images/1.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     }
