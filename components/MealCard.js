@@ -6,30 +6,21 @@ const MealCard = ({ meal }) => {
   const router = useRouter();
 
   const handlePress = () => {
-    if (meal?.id) {
-      router.push(`/detail/${meal.id}`);
-    } else {
-      console.warn('ID meal tidak ditemukan');
+    if (meal?.idMeal) {
+      router.push(`/detail/${meal.idMeal}`);
     }
   };
 
   return (
     <TouchableOpacity style={styles.card} onPress={handlePress}>
       <Image
-        source={{ uri: meal?.Image?.uri || 'https://via.placeholder.com/150' }}
+        source={{ uri: meal.strMealThumb }}
         style={styles.image}
         resizeMode="cover"
       />
       <View style={styles.textContainer}>
-        <Text style={styles.title} numberOfLines={1}>
-          {meal?.namaResep || 'Nama Resep Tidak Ditemukan'}
-        </Text>
-        <Text style={styles.author} numberOfLines={1}>
-          {meal?.author || 'Author Tidak Diketahui'}
-        </Text>
-        <Text style={styles.description} numberOfLines={2}>
-          {meal?.description || 'Deskripsi tidak tersedia'}
-        </Text>
+        <Text style={styles.title} numberOfLines={1}>{meal.strMeal}</Text>
+        <Text style={styles.author} numberOfLines={1}>{meal.strArea}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -48,28 +39,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
   },
-  image: {
-    width: '100%',
-    height: 120,
-  },
-  textContainer: {
-    padding: 10,
-  },
-  title: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    color: '#333',
-  },
-  author: {
-    fontSize: 12,
-    color: '#888',
-    marginTop: 4,
-  },
-  description: {
-    fontSize: 12,
-    color: '#666',
-    marginTop: 6,
-  },
+  image: { width: '100%', height: 120 },
+  textContainer: { padding: 10 },
+  title: { fontWeight: 'bold', fontSize: 16, color: '#333' },
+  author: { fontSize: 12, color: '#888', marginTop: 4 },
 });
 
 export default MealCard;
